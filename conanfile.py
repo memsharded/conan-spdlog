@@ -5,7 +5,7 @@ import os
 class spdlogConan(ConanFile):
     name = "spdlog"
     version = "0.1"
-    license = "<Put the package license here>"
+    license = "MIT"
     url = "https://github.com/memsharded/conan-spdlog"
 
     def source(self):
