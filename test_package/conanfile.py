@@ -2,13 +2,13 @@ from conans import ConanFile, CMake
 import os
 
 
-channel = os.getenv("CONAN_CHANNEL", "testing")
+channel = os.getenv("CONAN_CHANNEL", "stable")
 username = os.getenv("CONAN_USERNAME", "memsharded")
 
 
 class spdlogTestConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
-    requires = "spdlog/0.1@%s/%s" % (username, channel)
+    requires = "spdlog/0.9.0@%s/%s" % (username, channel)
     generators = "cmake"
 
     def build(self):

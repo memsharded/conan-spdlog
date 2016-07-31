@@ -1,16 +1,15 @@
-from conans import ConanFile, CMake, tools
-import os
+from conans import ConanFile
 
 
 class spdlogConan(ConanFile):
     name = "spdlog"
-    version = "0.1"
+    version = "0.9.0"
     license = "MIT"
     url = "https://github.com/memsharded/conan-spdlog"
 
     def source(self):
        self.run("git clone https://github.com/gabime/spdlog.git")
-       self.run("cd spdlog && git checkout 33a185188c2ed59ff6077025a28fc320c4f2dbc4")
+       self.run("cd spdlog && git checkout v0.9.0")
 
     def package(self):
         self.copy("*", dst="include", src="spdlog/include")

@@ -3,19 +3,25 @@
 
 int main(int, char* [])
 {
+    namespace spd = spdlog;
     try
-    {         
-         //Multithreaded console logger(with color support)
-        auto console = spdlog::stdout_logger_mt("console", true /*use color*/);
+    {
+        // console logger (multithreaded and with color)
+        auto console = spd::stdout_logger_mt("console", true);
         console->info("Welcome to spdlog!") ;
-        console->info("An info message example {} ..", 1);
-        console->info() << "Streams are supported too  " << 2;
-        // create a file rotating logger with 5mb size max and 3 rotated files
-        auto file_logger = spdlog::rotating_logger_mt("file_logger", "myfilename", 1024 * 1024 * 5, 3);
-        file_logger->info("Hello spdlog {} {} {}", 1, 2, "three");
+        console->info("An info message example {}..", 1);        
 
+        //Formatting examples
+        console->info("Easy padding in numbers like {:08d}", 12);
+        console->info("Support for int: {0:d};  hex: {0:x};  oct: {0:o}; bin: {0:b}", 42);
+        console->info("Support for floats {:03.2f}", 1.23456);
+        console->info("Positional args are {1} {0}..", "too", "supported");
+
+        console->info("{:<30}", "left aligned");
+        console->info("{:>30}", "right aligned");
+        console->info("{:^30}", "centered");
     }
-    catch (const spdlog::spdlog_ex& ex)
+    catch (const spd::spdlog_ex& ex)
     {
         std::cout << "Log failed: " << ex.what() << std::endl;
     }
