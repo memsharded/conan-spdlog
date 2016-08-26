@@ -8,7 +8,7 @@ username = os.getenv("CONAN_USERNAME", "memsharded")
 
 class spdlogTestConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
-    requires = "spdlog/0.9.0@%s/%s" % (username, channel)
+    requires = "spdlog/0.10.0@%s/%s" % (username, channel)
     generators = "cmake"
 
     def build(self):
