@@ -6,10 +6,23 @@ class spdlogConan(ConanFile):
     version = "0.10.0"
     license = "MIT"
     url = "https://github.com/memsharded/conan-spdlog"
+    options = {"fmt_external": [True, False]}
+    default_options = "fmt_external=False"
+
+    def requirements(self):
+        if self.options.fmt_external:
+            self.requires("fmt/3.0.0@memsharded/testing")
 
     def source(self):
        self.run("git clone https://github.com/gabime/spdlog.git")
        self.run("cd spdlog && git checkout v0.10.0")
 
     def package(self):
-        self.copy("*", dst="include", src="spdlog/include")
+        self.copy("*.h", dst="include", src="spdlog/include")
+        self.copy("*ostream.cc", dst="include", src="spdlog/include")
+        if not self.options.fmt_external:
+            self.copy("*format.cc", dst="include", src="spdlog/include")
+
+    def package_info(self):
+        if self.options.fmt_external:
+            self.cpp_info.defines.append("SPDLOG_FMT_EXTERNAL")
