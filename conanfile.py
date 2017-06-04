@@ -11,12 +11,11 @@ class spdlogConan(ConanFile):
 
     def requirements(self):
         if self.options.fmt_external:
-            self.requires("fmt/3.0.1@memsharded/testing")
-            # note: are we sure we want the testing channel?
+            self.requires("fmt/3.0.1@memsharded/stable")
 
     def source(self):
-       self.run("git clone https://github.com/gabime/spdlog.git")
-       self.run("cd spdlog && git checkout v%s" % self.version)
+        self.run("git clone https://github.com/gabime/spdlog.git")
+        self.run("cd spdlog && git checkout v%s" % self.version)
 
     def package(self):
         self.copy("*.h", dst="include", src="spdlog/include")
