@@ -3,7 +3,7 @@ from conans import ConanFile
 
 class spdlogConan(ConanFile):
     name = "spdlog"
-    version = "0.10.0"
+    version = "0.13.0"
     license = "MIT"
     url = "https://github.com/memsharded/conan-spdlog"
     options = {"fmt_external": [True, False]}
@@ -11,11 +11,12 @@ class spdlogConan(ConanFile):
 
     def requirements(self):
         if self.options.fmt_external:
-            self.requires("fmt/3.0.0@memsharded/testing")
+            self.requires("fmt/3.0.1@memsharded/testing")
+            # note: are we sure we want the testing channel?
 
     def source(self):
        self.run("git clone https://github.com/gabime/spdlog.git")
-       self.run("cd spdlog && git checkout v0.10.0")
+       self.run("cd spdlog && git checkout v%s" % self.version)
 
     def package(self):
         self.copy("*.h", dst="include", src="spdlog/include")
